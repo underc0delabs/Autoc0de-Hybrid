@@ -1,0 +1,8 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Autoc0de TestNG Parallel Suite" verbose="1" parallel="methods" thread-count="2" data-provider-thread-count="2">
+    <test name="Autoc0de BDD Parallel Tests">
+        <classes>
+            <class name="runner.TestRunnerParallel"/>
+        </classes>
+    </test>
+</suite>

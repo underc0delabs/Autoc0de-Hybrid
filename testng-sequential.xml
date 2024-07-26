@@ -1,0 +1,8 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Autoc0de TestNG Sequential Suite" verbose="1" parallel="false" thread-count="1" data-provider-thread-count="1">
+    <test name="Autoc0de BDD Sequential Tests">
+        <classes>
+            <class name="runner.TestRunner"/>
+        </classes>
+    </test>
+</suite>

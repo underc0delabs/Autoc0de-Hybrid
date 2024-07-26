@@ -1,0 +1,360 @@
+<project
+    xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <!-- General Information about the Framework -->
+    <name>Autoc0de - Open Source Web and API Automation Framework</name>
+    <description>Automation framework for web and API applications</description>
+    <inceptionYear>2024</inceptionYear>
+
+    <!-- Developers of the automation project -->
+
+    <developers>
+        <developer>
+            <id>jvitelli</id>
+            <name>Joel Vitelli</name>
+            <email>jvitelli92@gmail.com</email>
+            <timezone>Latam/Argentina</timezone>
+        </developer>
+    </developers>
+
+    <groupId>com.automation.autoc0de</groupId>
+    <artifactId>Autoc0de-Hybrid</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+    <properties>
+        <!--suppress UnresolvedMavenProperty -->
+        <tagExecution>@ExampleTag</tagExecution>
+        <navigateUrl>https://underc0de.org/</navigateUrl>
+        <apiBaseURL>https://pokeapi.co/api/v2</apiBaseURL>
+        <selectedBrowser>Chromium</selectedBrowser>
+    </properties>
+
+    <dependencies>
+        <!-- https://mvnrepository.com/artifact/com.microsoft.playwright/playwright -->
+	    <dependency>
+	      <groupId>com.microsoft.playwright</groupId>
+	      <artifactId>playwright</artifactId>
+	      <version>1.45.0</version>
+	    </dependency>
+        <!-- https://mvnrepository.com/artifact/io.cucumber/cucumber-java -->
+        <dependency>
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-java</artifactId>
+            <version>7.18.1</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/io.cucumber/cucumber-testng -->
+        <dependency>
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-testng</artifactId>
+            <version>7.18.1</version>
+            <scope>test</scope>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/io.cucumber/cucumber-core -->
+        <dependency>
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-core</artifactId>
+            <version>7.18.1</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-log4j12 -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-reload4j</artifactId>
+            <version>2.0.13</version>
+            <scope>test</scope>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-api -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>2.0.13</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.testng/testng -->
+        <dependency>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+            <version>7.10.2</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.34</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/tech.grasshopper/extentreports-cucumber7-adapter -->
+        <dependency>
+            <groupId>tech.grasshopper</groupId>
+            <artifactId>extentreports-cucumber7-adapter</artifactId>
+            <version>1.14.0</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.assertj/assertj-core -->
+        <dependency>
+            <groupId>org.assertj</groupId>
+            <artifactId>assertj-core</artifactId>
+            <version>3.26.3</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/io.rest-assured/rest-assured -->
+        <dependency>
+            <groupId>io.rest-assured</groupId>
+            <artifactId>rest-assured</artifactId>
+            <version>5.5.0</version>
+            <scope>test</scope>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/commons-configuration/commons-configuration -->
+        <dependency>
+            <groupId>commons-configuration</groupId>
+            <artifactId>commons-configuration</artifactId>
+            <version>1.10</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.json/json -->
+        <dependency>
+            <groupId>org.json</groupId>
+            <artifactId>json</artifactId>
+            <version>20240303</version>
+        </dependency>
+    </dependencies>
+
+    <profiles>
+        <profile>
+            <id>Local</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <mode>Local</mode>
+                <suiteXmlFile>testng-sequential.xml</suiteXmlFile>
+            </properties>
+        </profile>
+        <profile>
+            <id>Grid</id>
+            <properties>
+                <mode>Grid</mode>
+                <parallelMode>false</parallelMode>
+                <suiteXmlFile>testng-sequential.xml</suiteXmlFile>
+            </properties>
+        </profile>
+        <profile>
+            <id>GridParallel</id>
+            <properties>
+                <mode>Grid</mode>
+                <parallelMode>true</parallelMode>
+                <suiteXmlFile>testng-parallel.xml</suiteXmlFile>
+            </properties>
+        </profile>
+        <profile>
+            <id>LocalCrossBrowser</id>
+            <activation>
+            </activation>
+            <properties>
+                <mode>Local</mode>
+                <parallelMode>false</parallelMode>
+                <suiteXmlFile>testng-crossbrowser.xml</suiteXmlFile>
+                <crossBrowser>true</crossBrowser>
+            </properties>
+        </profile>
+        <profile>
+            <id>GridCrossBrowser</id>
+            <activation>
+            </activation>
+            <properties>
+                <mode>Grid</mode>
+                <parallelMode>false</parallelMode>
+                <suiteXmlFile>testng-crossbrowser.xml</suiteXmlFile>
+                <crossBrowser>true</crossBrowser>
+            </properties>
+        </profile>
+        <!-- SPECIFIC PROFILES FOR EACH BROWSER -->
+        <profile>
+            <id>LocalChromium</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <mode>Local</mode>
+                <parallelMode>false</parallelMode>
+                <suiteXmlFile>testng-sequential.xml</suiteXmlFile>
+                <selectedBrowser>Chromium</selectedBrowser>
+            </properties>
+        </profile>
+        <profile>
+            <id>LocalFirefox</id>
+            <activation>
+            </activation>
+            <properties>
+                <mode>Local</mode>
+                <parallelMode>false</parallelMode>
+                <suiteXmlFile>testng-sequential.xml</suiteXmlFile>
+                <selectedBrowser>Firefox</selectedBrowser>
+            </properties>
+        </profile>
+        <profile>
+            <id>LocalWebkit</id>
+            <activation>
+            </activation>
+            <properties>
+                <mode>Local</mode>
+                <parallelMode>false</parallelMode>
+                <suiteXmlFile>testng-sequential.xml</suiteXmlFile>
+                <selectedBrowser>Webkit</selectedBrowser>
+            </properties>
+        </profile>
+        <profile>
+            <id>LocalChromiumParallel</id>
+            <activation>
+            </activation>
+            <properties>
+                <mode>Local</mode>
+                <parallelMode>true</parallelMode>
+                <suiteXmlFile>testng-parallel.xml</suiteXmlFile>
+                <selectedBrowser>Chromium</selectedBrowser>
+            </properties>
+        </profile>
+        <profile>
+            <id>LocalFirefoxParallel</id>
+            <activation>
+            </activation>
+            <properties>
+                <parallelMode>true</parallelMode>
+                <mode>Local</mode>
+                <suiteXmlFile>testng-parallel.xml</suiteXmlFile>
+                <selectedBrowser>Firefox</selectedBrowser>
+            </properties>
+        </profile>
+        <profile>
+            <id>LocalWebkitParallel</id>
+            <activation>
+            </activation>
+            <properties>
+                <mode>Local</mode>
+                <parallelMode>true</parallelMode>
+                <suiteXmlFile>testng-parallel.xml</suiteXmlFile>
+                <selectedBrowser>Webkit</selectedBrowser>
+            </properties>
+        </profile>
+        <profile>
+            <id>GridChromium</id>
+            <activation>
+            </activation>
+            <properties>
+                <mode>Grid</mode>
+                <parallelMode>false</parallelMode>
+                <suiteXmlFile>testng-sequential.xml</suiteXmlFile>
+                <selectedBrowser>Chromium</selectedBrowser>
+            </properties>
+        </profile>
+        <profile>
+            <id>GridFirefox</id>
+            <activation>
+            </activation>
+            <properties>
+                <mode>Grid</mode>
+                <parallelMode>false</parallelMode>
+                <suiteXmlFile>testng-sequential.xml</suiteXmlFile>
+                <selectedBrowser>Firefox</selectedBrowser>
+            </properties>
+        </profile>
+        <profile>
+            <id>GridWebkit</id>
+            <activation>
+            </activation>
+            <properties>
+                <mode>Grid</mode>
+                <parallelMode>false</parallelMode>
+                <suiteXmlFile>testng-sequential.xml</suiteXmlFile>
+                <selectedBrowser>Webkit</selectedBrowser>
+            </properties>
+        </profile>
+        <profile>
+            <id>GridChromiumParallel</id>
+            <activation>
+            </activation>
+            <properties>
+                <mode>Grid</mode>
+                <parallelMode>true</parallelMode>
+                <suiteXmlFile>testng-parallel.xml</suiteXmlFile>
+                <selectedBrowser>Chromium</selectedBrowser>
+            </properties>
+        </profile>
+        <profile>
+            <id>GridFirefoxParallel</id>
+            <activation>
+            </activation>
+            <properties>
+                <mode>Grid</mode>
+                <parallelMode>true</parallelMode>
+                <suiteXmlFile>testng-parallel.xml</suiteXmlFile>
+                <selectedBrowser>Firefox</selectedBrowser>
+            </properties>
+        </profile>
+        <profile>
+            <id>GridWebkitParallel</id>
+            <activation>
+            </activation>
+            <properties>
+                <mode>Grid</mode>
+                <parallelMode>true</parallelMode>
+                <suiteXmlFile>testng-parallel.xml</suiteXmlFile>
+                <selectedBrowser>Webkit</selectedBrowser>
+            </properties>
+        </profile>
+    </profiles>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.13.0</version>
+                <configuration>
+                    <source>22</source>
+                    <target>22</target>
+                    <encoding>UTF-8</encoding>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.3.1</version>
+                <executions>
+                    <execution>
+                        <phase>integration-test</phase>
+                        <goals>
+                            <goal>test</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <includes>
+                        <include>**/*Runner*.class</include>
+                    </includes>
+                    <argLine>
+                        -Dcucumber.filter.tags="${tagExecution}"
+                        --add-opens java.base/java.lang=ALL-UNNAMED
+                        --add-opens java.base/java.io=ALL-UNNAMED
+                        --add-opens java.base/java.util=ALL-UNNAMED
+                        --add-opens java.base/java.util.concurrent=ALL-UNNAMED
+                    </argLine>
+                    <systemPropertyVariables>
+                        <!--suppress UnresolvedMavenProperty -->
+                        <executionMode>${mode}</executionMode>
+                        <!--suppress UnresolvedMavenProperty -->
+                        <browser>${selectedBrowser}</browser>
+                        <!--suppress UnresolvedMavenProperty -->
+                        <applicationUrl>${navigateUrl}</applicationUrl>
+                        <!--suppress UnresolvedMavenProperty -->
+                        <apiURL>${apiBaseURL}</apiURL>
+                        <!--suppress UnresolvedMavenProperty -->
+                        <parallel>${parallelMode}</parallel>
+                        <!--suppress UnresolvedMavenProperty -->
+                        <crossBrowserActivation>${crossBrowser}</crossBrowserActivation>
+                        <remoteUrl/>
+                    </systemPropertyVariables>
+                    <testFailureIgnore>true</testFailureIgnore>
+                    <suiteXmlFiles>
+                        <suiteXmlFile>${suiteXmlFile}</suiteXmlFile>
+                    </suiteXmlFiles>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>

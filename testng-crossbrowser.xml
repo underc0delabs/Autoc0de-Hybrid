@@ -1,0 +1,21 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Autoc0de Cross-Browser Suite" parallel="methods" thread-count="3">
+    <test name="Chromium Tests">
+        <parameter name="browser" value="chromium"/>
+        <classes>
+            <class name="runner.TestRunnerParallel"/>
+        </classes>
+    </test>
+    <test name="Firefox Tests">
+        <parameter name="browser" value="firefox"/>
+        <classes>
+            <class name="runner.TestRunnerParallel"/>
+        </classes>
+    </test>
+    <test name="Webkit Tests">
+        <parameter name="browser" value="webkit"/>
+        <classes>
+            <class name="runner.TestRunnerParallel"/>
+        </classes>
+    </test>
+</suite>

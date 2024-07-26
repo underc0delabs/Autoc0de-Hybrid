@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<extentreports>
+    <configuration>
+        <!-- report theme -->
+
+        <!-- standard, dark -->
+
+        <theme>dark</theme>
+        <!-- document encoding -->
+
+        <!-- defaults to UTF-8 -->
+
+        <encoding>UTF-8</encoding>
+        <!-- protocol for script and stylesheets -->
+
+        <!-- defaults to https -->
+
+        <protocol>https</protocol>
+        <!-- title of the document -->
+        <documentTitle>Autoc0de - Automation Framework Report</documentTitle>
+        <!-- report name - displayed at top-nav -->
+
+        <reportName>Autoc0de - Automation Framework Report</reportName>
+        <!-- location of charts in the com.core.tests view -->
+        <assignAuthor>Joel Vitelli</assignAuthor>
+        <!-- top, bottom -->
+        <enableTimeline>true</enableTimeline>
+        <nodeAsToggles>false</nodeAsToggles>
+        <nodeAsAccordion>false</nodeAsAccordion>
+        <autoCreateRelativePathMedia>true</autoCreateRelativePathMedia>
+        <enableDashboard>true</enableDashboard>
+
+        <testViewChartLocation>top</testViewChartLocation>
+        <!-- timestamp format -->
+        <timeStampFormat>dd MMM, yyyy HH:mm:ss</timeStampFormat>
+        <!-- custom javascript -->
+
+        <!-- offlineMode>true</offlineMode -->
+
+        <scripts>
+
+            <![CDATA[
+            $(document).ready(function() {
+            });
+            ]]>
+        </scripts>
+        <!-- custom styles -->
+        <styles>
+            <![CDATA[
+            ]]>
+        </styles>
+    </configuration>
+</extentreports>
