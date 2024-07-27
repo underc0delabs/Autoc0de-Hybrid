@@ -1,4 +1,4 @@
-[![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](https://github.com/underc0delabs/Autoc0de-Hybrid/blob/main/LICENSE)
+[![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](https://github.com/underc0delabs/Autoc0de-Hybrid/blob/main/LICENSE)[![Execute Test Manualy](https://github.com/underc0delabs/Autoc0de-Hybrid/actions/workflows/Tests.yml/badge.svg)](https://github.com/underc0delabs/Autoc0de-Hybrid/actions/workflows/Tests.yml)
 
 
 # Autoc0de Hybrid - Automation Frontend and API Framework
