@@ -22,5 +22,5 @@ jobs:
       if: always()
       uses: actions/upload-artifact@v4
       with:
-        name: Cucumber Reports
+        name: Reports
         path: target/Reports
