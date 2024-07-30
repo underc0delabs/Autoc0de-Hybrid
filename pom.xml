@@ -306,6 +306,7 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.13.0</version>
                 <configuration>
+		    <release>14</release>
                     <encoding>UTF-8</encoding>
                 </configuration>
             </plugin>
