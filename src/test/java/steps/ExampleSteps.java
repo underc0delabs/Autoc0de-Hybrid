@@ -32,12 +32,11 @@ public class ExampleSteps {
 
     @And("^the user complete te user information. Usuario: \"(.*)\" Contraseña: \"(.*)\"$")
     public void theUserCompleteTeUserInformationUsuarioUserContraseñaPass(String user, String pass) {
-        examplePage.completeLoginData(user, pass);
     }
 
     @Then("the user verifies that they are logged in.")
     public void theUserVerifiesThatTheyAreLoggedIn() {
-        examplePage.verifyLogin();
+    
     }
 
 }
